@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>ETM UI</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <div style="text-align: center;">
+        <h1 >Endurance Testing Machine UI</h1>
+      <br>
+      <div class="container">
+        <div class="row"> 
+
+          <div class="col-md"> 
+            <button type="button" class="caption file-select btn btn-info btn-block">File Select</button>
+            <br>
+            <textarea class="file-form" placeholder="File Contents..." rows="10"></textarea>
+            <br>
+            <br>
+            <br>
+            <img id="nextflex-logo" src="../img/logo_large.png" alt="nextflex logo">
+            <br>
+          </div>
+
+          <div class="col-md"> 
+            <button type="button" class="caption btn btn-info btn-block">Connect to ETM</button>
+            <br>
+            <div class="row">
+              <div class="col-5" style="text-align: left;">
+                <label for="ip">IP:</label>
+                <br>
+                <label for="name">NAME:</label>
+                <br>
+                <label for="timeout">TIMEOUT:</label>
+              </div>
+              <div class="col-5">
+                <input class="etm-reading" id="ip" placeholder="0.0.0"></input>
+                <br>
+                <input class="etm-reading" id="name" placeholder="DMLHB"></input>
+                <br>
+                <input class="etm-reading" id="timeout" placeholder="1"></input>
+              </div>
+            </div>
+            <br>
+            <div class="count-speed col align-items-start">
+              <p class="count-speed-head">Count</p>
+              <p id="count">0</p>
+            </div>
+            <br>
+            <div class="count-speed col">
+              <p class="count-speed-head">Speed</p>
+              <p id="speed">0</p>
+            </div>
+            <br>
+            
+          </div>
+
+          <div class="col-md"> <button type="button" class="caption btn btn-info btn-block">Connect to Multimeter</button>
+            <br>
+            <div class="row">
+              <div class="col-5" style="text-align: left;">
+                <label for="port">PORT:</label>
+                <br>
+              </div>
+              <div class="col-5" style="text-align: left;">
+                <input class="port" id="port" placeholder="COM4"></input>
+                <br>
+              </div>
+            </div>
+            <br>
+            <div class="multimeter col align-items-start">
+              <p class="multimeter-head">Value</p>
+              <form >
+                <div class= "row" style="text-align: left; padding-left: 20%;">
+                  <div class="col-sm-5">
+                    <input type="checkbox" id="ch1" name="ch1" value="ch1">
+                    <label for="ch1"> CH1</label> <br>
+                    <input type="checkbox" id="ch3" name="ch3" value="ch3">
+                    <label for="ch3"> CH3</label> <br>
+                    <input type="checkbox" id="ch5" name="ch5" value="ch5">
+                    <label for="ch5"> CH5</label> <br>
+                    <input type="checkbox" id="ch7" name="ch7" value="ch7">
+                    <label for="ch7"> CH7</label> <br>
+                    <input type="checkbox" id="ch9" name="ch9" value="ch9">
+                    <label for="ch9"> CH9</label> <br>
+                    <input type="checkbox" id="ch11" name="ch11" value="ch11">
+                    <label for="ch11"> CH11</label> <br>
+                    <input type="checkbox" id="ch13" name="ch13" value="ch13">
+                    <label for="ch13"> CH13</label> <br>
+                    <input type="checkbox" id="ch15" name="ch15" value="ch15">
+                    <label for="ch15"> CH15</label> <br>
+                  </div>
+                  <div class="col-sm-5">
+                    <input type="checkbox" id="ch2" name="ch2" value="ch2">
+                    <label for="ch2"> CH2</label> <br>
+                    <input type="checkbox" id="ch4" name="ch4" value="ch4">
+                    <label for="ch4"> CH4</label> <br>
+                    <input type="checkbox" id="ch6" name="ch6" value="ch6">
+                    <label for="ch6"> CH6</label> <br>
+                    <input type="checkbox" id="ch8" name="ch8" value="ch8">
+                    <label for="ch8"> CH8</label> <br>
+                    <input type="checkbox" id="ch10" name="ch10" value="ch10">
+                    <label for="ch10"> CH10</label> <br>
+                    <input type="checkbox" id="ch12" name="ch12" value="ch12">
+                    <label for="ch12"> CH12</label> <br>
+                    <input type="checkbox" id="ch14" name="ch14" value="ch14">
+                    <label for="ch14"> CH14</label> <br>
+                    <input type="checkbox" id="ch16" name="ch16" value="ch16">
+                    <label for="ch16"> CH16</label> <br>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>   
+      </div>
+    </div>
+
+    <script>
+      var ipc = require('electron').ipcRenderer;
+      var nfLogo = document.getElementById('nextflex-logo');
+      nfLogo.addEventListener('click', function(){
+          ipc.once('actionReply', function(event, response){
+              processResponse(response);
+          })
+    ipc.send('invokeAction', 'someData');
+});
+    </script>
+  </body>
+</html>
